@@ -7,7 +7,6 @@ function buyCake() {
   };
 }
 //Action is with the type property and action creater is a function with the type property
-
 //Reducer:
 //(previousState,action)=>newState
 
