@@ -1,11 +1,18 @@
 const redux = require("redux"); //1.Holds application state //import redux
 const createStore = redux.createStore; //1.Holds application state //create store
 const BUY_CAKE = "BUY_CAKE";
+const BUY_ICECREAM = "BUY_ICECREAM";
 
 function buyCake() {
   return {
     type: BUY_CAKE,
     info: "First redux action",
+  };
+}
+
+function buyIceCream() {
+  return {
+    type: BUY_ICECREAM,
   };
 }
 //Action is with the type property and action creater is a function with the type property
@@ -15,6 +22,7 @@ function buyCake() {
 
 const initialState = {
   numOfCakes: 10,
+  numOfIceCreams: 20,
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +31,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         numOfCakes: state.numOfCakes - 1,
+      }; //create copy of state and then reduce numOfCakes
+    case BUY_ICECREAM:
+      return {
+        ...state,
+        numOfIceCreams: state.numOfIceCreams - 1,
       }; //create copy of state and then reduce numOfCakes
     default:
       return state;
@@ -35,4 +48,7 @@ const unsubscribe = store.subscribe(() => console.log("Updated state", store.get
 store.dispatch(buyCake()); //3.Allow state to be updated via dispatch
 store.dispatch(buyCake());
 store.dispatch(buyCake());
+store.dispatch(buyIceCream());
+store.dispatch(buyIceCream());
+store.dispatch(buyIceCream());
 unsubscribe(); //5.handle unregistering of listeners
