@@ -1,6 +1,9 @@
 const redux = require("redux"); //1.Holds application state //import redux
 const createStore = redux.createStore; //1.Holds application state //create store
 const combineReducers = redux.combineReducers;
+const reduxLogger = require("redux-logger"); //middleware-install logger
+const logger = reduxLogger.createLogger(); //middleware-create logger
+const applyMiddleware = redux.applyMiddleware; //middleware-to use middleware use this
 const BUY_CAKE = "BUY_CAKE";
 const BUY_ICECREAM = "BUY_ICECREAM";
 
@@ -76,9 +79,9 @@ const rootReducer = combineReducers({
   cake: cakeReducer,
   iceCream: iceCreamReducer,
 });
-const store = createStore(rootReducer); //1.Holds application state
+const store = createStore(rootReducer, applyMiddleware(logger)); //1.Holds application state,apply middleware
 console.log("Initial state", store.getState()); //2.Allow access to state via getState() i.e. here provides initial state of app because state is not updated
-const unsubscribe = store.subscribe(() => console.log("Updated state", store.getState())); //subsribe changes in the store//4.registers listeners via subscribe
+const unsubscribe = store.subscribe(() => {}); //subsribe changes in the store//4.registers listeners via subscribe
 store.dispatch(buyCake()); //3.Allow state to be updated via dispatch
 store.dispatch(buyCake());
 store.dispatch(buyCake());
